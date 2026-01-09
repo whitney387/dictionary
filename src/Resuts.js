@@ -1,4 +1,5 @@
 import React from "react";
+import Synonyms from "./Synonyms";
 
 export default function Results(props) {
   if (props.results) {
@@ -17,6 +18,9 @@ export default function Results(props) {
                 {meaning.definition}
                 <br />
                 <em>{meaning.example}</em>
+              </p>
+              <p>
+                <Synonyms synonyms={meaning.synonyms} />
               </p>
             </section>
           );
