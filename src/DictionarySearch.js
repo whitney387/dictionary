@@ -2,23 +2,35 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./DictionarySearch.css";
 import Results from "./Resuts";
+import Photos from "./Photos";
 
 export default function DictionarySearch() {
   let [keyWord, setKeyWord] = useState("");
   let [results, setResults] = useState(null);
+  let [photos, setPhotos] = useState(null);
 
   function handleResponse(response) {
     setResults(response.data);
   }
 
+  function handlePexelsResponse(response) {
+    setPhotos(response.data.photos);
+  }
+
   function search(event) {
     event.preventDefault();
 
-    // API Call should happen here when you press ENTER
+    // 1. Dictionary API Call
     let apiKey = "23e2742eef1f1bc7tod430e337aaf4bd";
     let apiUrl = `https://api.shecodes.io/dictionary/v1/define?word=${keyWord}&key=${apiKey}`;
-
     axios.get(apiUrl).then(handleResponse);
+
+    let pexelsApiKey =
+      "nZVwOUePBhSXVxggthrPgDMwgetCDL0gayy5Xke1MptbxdvjHrL6J1rA";
+    let pexelsApiUrl = `https://api.pexels.com/v1/search?query=${keyWord}&per_page=9`;
+    let headers = { Authorization: pexelsApiKey };
+
+    axios.get(pexelsApiUrl, { headers: headers }).then(handlePexelsResponse);
   }
 
   function handleKeywordChange(event) {
@@ -37,6 +49,7 @@ export default function DictionarySearch() {
         />
       </form>
       <Results results={results} />
+      <Photos photos={photos} />
     </div>
   );
 }
