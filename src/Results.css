@@ -1,5 +1,6 @@
 .word {
   font-size: 36px;
+  margin-bottom:10px;
 }
 .Results {
   padding: 20px;
@@ -17,6 +18,7 @@
   font-size: 30px;
   color: #350000;
   text-decoration: underline;
+  margin-bottom: 10px;
 }
 .Synonyms {
   color: #5c0303;
@@ -27,4 +29,6 @@
 section {
   border-bottom: 1px dotted #660303;
   border-width: 60%;
+  margin-bottom: 20px;
+
 }
